@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>毕业相册</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            text-align: center;
+            background: url("https://editor-user.365editor.com/112/43/5604843/1745730175977250.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        #text {
+            white-space: pre-wrap;
+            max-width: 600px;
+            margin: 100px auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #musicBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+            border: none;
+            cursor: pointer;
+        }
+        .rotating {
+            animation: rotate 1s linear infinite;
+        }
+        @keyframes rotate {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgm" src="1.mp3" autoplay loop></audio>
+    <div id="text"></div>
+    <button onclick="window.location.href='相册.html'">跳转相册</button>
+    <button id="musicBtn" class="rotating" onclick="toggleMusic()"></button>
+    <script>
+        const content = "就快要大学毕业了，四年的时光转瞬结束，心理还是有点莫名哀伤，只是没有体现出来罢了，再见，母校-----------------曾梽豪";
+        let index = 0;
+        const speed = 100;
+
+        function showText() {
+            if (index < content.length) {
+                document.getElementById("text").textContent += content.charAt(index);
+                index++;
+                setTimeout(showText, speed);
+            }
+        }
+        showText();
+
+        function toggleMusic() {
+            const bgm = document.getElementById('bgm');
+            const btn = document.getElementById('musicBtn');
+            if (bgm.paused) {
+                bgm.play();
+                btn.classList.add('rotating');
+            } else {
+                bgm.pause();
+                btn.classList.remove('rotating');
+            }
+        }
+    </script>
+</body>
+</html>
